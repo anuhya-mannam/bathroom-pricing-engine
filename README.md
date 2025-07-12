@@ -100,3 +100,8 @@ python pricing_engine.py
 ## 👩‍💻 Contributors
 
 - [Anuhya Mannam](https://github.com/anuhya-mannam) – Developer and Maintainer
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
