@@ -97,3 +97,6 @@ This Python project builds a structured renovation quote from a plain-English cl
 ```bash
 python pricing_engine.py
 >>>>>>> f25189d (Final cleaned up README)
+## 👩‍💻 Contributors
+
+- [Anuhya Mannam](https://github.com/anuhya-mannam) – Developer and Maintainer
