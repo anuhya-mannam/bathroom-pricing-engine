@@ -1,0 +1,93 @@
+{
+  "project": "Full Bathroom Renovation",
+  "location": "Marseille",
+  "area_m2": 4,
+  "tasks": [
+    {
+      "zone": "Remove",
+      "task": "Remove old tiles",
+      "materials": [],
+      "labor_hours": 3,
+      "labor_cost": 90,
+      "material_cost": 0,
+      "vat_rate": 0.2,
+      "margin": 0.15,
+      "total_cost": 124.2,
+      "confidence_score": 0.9
+    },
+    {
+      "zone": "Redo",
+      "task": "Redo plumbing for shower",
+      "materials": [
+        "pipes",
+        "fittings"
+      ],
+      "labor_hours": 6,
+      "labor_cost": 180,
+      "material_cost": 60,
+      "vat_rate": 0.2,
+      "margin": 0.15,
+      "total_cost": 331.2,
+      "confidence_score": 0.9
+    },
+    {
+      "zone": "Replace",
+      "task": "Replace toilet",
+      "materials": [
+        "toilet"
+      ],
+      "labor_hours": 2,
+      "labor_cost": 60,
+      "material_cost": 120,
+      "vat_rate": 0.2,
+      "margin": 0.15,
+      "total_cost": 248.4,
+      "confidence_score": 0.9
+    },
+    {
+      "zone": "Install",
+      "task": "Install vanity",
+      "materials": [
+        "vanity"
+      ],
+      "labor_hours": 3,
+      "labor_cost": 90,
+      "material_cost": 150,
+      "vat_rate": 0.2,
+      "margin": 0.15,
+      "total_cost": 331.2,
+      "confidence_score": 0.9
+    },
+    {
+      "zone": "Repaint",
+      "task": "Repaint walls",
+      "materials": [
+        "paint"
+      ],
+      "labor_hours": 2,
+      "labor_cost": 60,
+      "material_cost": 50,
+      "vat_rate": 0.2,
+      "margin": 0.15,
+      "total_cost": 151.8,
+      "confidence_score": 0.9
+    },
+    {
+      "zone": "Lay",
+      "task": "Lay ceramic floor tiles",
+      "materials": [
+        "ceramic tiles"
+      ],
+      "labor_hours": 4,
+      "labor_cost": 120,
+      "material_cost": 100,
+      "vat_rate": 0.2,
+      "margin": 0.15,
+      "total_cost": 303.6,
+      "confidence_score": 0.9
+    }
+  ],
+  "total_quote": 1490.4,
+  "notes": "Budget-conscious",
+  "error_flags": []
+}
