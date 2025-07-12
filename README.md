@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ✅ FINAL VERSION — Copy & Paste This Entire Block into README.md:
 markdown
 Copy
@@ -84,3 +85,15 @@ Margin is set at 15%
 VAT rate pulled based on city
 
 Area-based pricing logic can be extended
+=======
+# 🚿 Donizo – Smart Bathroom Pricing Engine
+
+This Python project builds a structured renovation quote from a plain-English client transcript using modular pricing logic.
+
+---
+
+## 🔧 How to Run
+
+```bash
+python pricing_engine.py
+>>>>>>> f25189d (Final cleaned up README)
