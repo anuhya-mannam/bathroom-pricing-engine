@@ -1,0 +1,12 @@
+{
+    "adjustments": {
+      "Replace toilet": {
+        "confidence_score": 0.95
+      },
+      "Redo plumbing for shower": {
+        "confidence_score": 0.8
+      }
+    }
+  }
+  
+  

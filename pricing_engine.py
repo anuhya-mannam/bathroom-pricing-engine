@@ -1,15 +1,15 @@
 import json
-import os
 from pricing_logic.material_db import get_material_costs
 from pricing_logic.labor_calc import estimate_labor
 from pricing_logic.vat_rules import get_vat
 
-# 1. Input Transcript (hardcoded for now)
-transcript = """
-Client wants to renovate a small 4m² bathroom. They’ll remove the old tiles, redo the plumbing for the shower, replace the toilet, install a vanity, repaint the walls, and lay new ceramic floor tiles. Budget-conscious. Located in Marseille.
-"""
+# Sample input transcript
+transcript = """Client wants to renovate a small 4m² bathroom. 
+They’ll remove the old tiles, redo the plumbing for the shower, 
+replace the toilet, install a vanity, repaint the walls, 
+and lay new ceramic floor tiles. Budget-conscious. Located in Marseille."""
 
-# 2. Extract details (simplified logic)
+# Parse input (simplified for now)
 tasks = [
     "Remove old tiles",
     "Redo plumbing for shower",
@@ -19,60 +19,85 @@ tasks = [
     "Lay ceramic floor tiles"
 ]
 
-project = {
+location = "Marseille"
+area = 4  # m²
+vat_rate = get_vat(location)
+
+task_outputs = []
+total_quote = 0
+
+for task in tasks:
+    materials = []
+    if "plumbing" in task:
+        materials = ["pipes", "fittings"]
+    elif "toilet" in task:
+        materials = ["toilet"]
+    elif "vanity" in task:
+        materials = ["vanity"]
+    elif "paint" in task:
+        materials = ["paint"]
+    elif "tiles" in task:
+        materials = ["ceramic tiles"]
+
+    material_cost = get_material_costs(materials)
+    labor_hours, labor_cost = estimate_labor(task, location)
+    margin = 0.15
+    base_cost = labor_cost + material_cost
+    total_cost = base_cost * (1 + vat_rate) * (1 + margin)
+
+    task_outputs.append({
+        "zone": task.split()[0],
+        "task": task,
+        "materials": materials,
+        "labor_hours": labor_hours,
+        "labor_cost": labor_cost,
+        "material_cost": material_cost,
+        "vat_rate": vat_rate,
+        "margin": margin,
+        "total_cost": round(total_cost, 2),
+        "confidence_score": 0.9
+    })
+
+    total_quote += total_cost
+
+# -----------------------
+# ✅ Feedback Loop Section
+# -----------------------
+
+# Load feedback from data/feedback.json
+try:
+    with open("data/feedback.json", "r") as f:
+        feedback_data = json.load(f)
+except FileNotFoundError:
+    feedback_data = {"adjustments": {}}
+
+# Apply feedback to adjust confidence scores
+for task in task_outputs:
+    task_name = task["task"]
+    feedback = feedback_data["adjustments"].get(task_name)
+    if feedback and "confidence_score" in feedback:
+        task["confidence_score"] = feedback["confidence_score"]
+
+# -----------------------
+# ✅ Build final quote JSON
+# -----------------------
+
+quote = {
     "project": "Full Bathroom Renovation",
-    "location": "Marseille",
-    "area_m2": 4,
-    "tasks": [],
-    "total_quote": 0,
+    "location": location,
+    "area_m2": area,
+    "tasks": task_outputs,
+    "total_quote": round(total_quote, 2),
     "notes": "Budget-conscious",
     "error_flags": []
 }
 
-city = "Marseille"
-margin = 0.15  # Budget-conscious logic
+# Save output to JSON file
+with open("output/sample_quote.json", "w") as f:
+    json.dump(quote, f, indent=2)
 
-# 3. Loop through tasks
-total = 0
-for task in tasks:
-    materials = get_material_costs(task, city)
-    labor_hours, labor_cost = estimate_labor(task, city)
-    material_cost = sum(m["cost"] for m in materials)
-    vat = get_vat(task)
-    confidence_score = 0.9
+print("✅ Quote generated successfully!")
 
-    subtotal = labor_cost + material_cost
-    subtotal_with_margin = subtotal * (1 + margin)
-    total_with_vat = subtotal_with_margin * (1 + vat)
-
-    task_data = {
-        "zone": task.split()[0],  # Rough zone
-        "task": task,
-        "materials": [m["name"] for m in materials],
-        "labor_hours": labor_hours,
-        "labor_cost": labor_cost,
-        "material_cost": material_cost,
-        "vat_rate": vat,
-        "margin": margin,
-        "total_cost": round(total_with_vat, 2),
-        "confidence_score": confidence_score
-    }
-
-    project["tasks"].append(task_data)
-    total += total_with_vat
-
-project["total_quote"] = round(total, 2)
-
-# ✅ Write to sample_quote.json
-try:
-    with open("output/sample_quote.json", "w", encoding="utf-8") as f:
-        json.dump(project, f, indent=2)
-    print("✅ Quote written to:", os.path.abspath("output/sample_quote.json"))
-except Exception as e:
-    print("❌ Failed to write file:", e)
-
-# 🖨️ Also print to terminal
-print(json.dumps(project, indent=2))
 
 
 

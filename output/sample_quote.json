@@ -6,13 +6,15 @@
     {
       "zone": "Remove",
       "task": "Remove old tiles",
-      "materials": [],
+      "materials": [
+        "ceramic tiles"
+      ],
       "labor_hours": 3,
       "labor_cost": 90,
-      "material_cost": 0,
+      "material_cost": 100,
       "vat_rate": 0.2,
       "margin": 0.15,
-      "total_cost": 124.2,
+      "total_cost": 262.2,
       "confidence_score": 0.9
     },
     {
@@ -87,7 +89,7 @@
       "confidence_score": 0.9
     }
   ],
-  "total_quote": 1490.4,
+  "total_quote": 1628.4,
   "notes": "Budget-conscious",
   "error_flags": []
 }
